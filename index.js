@@ -25,18 +25,17 @@ var not = function(start, end){
   }
 }
 
-function solve(n, start, end){
-
+function solver(n, start, end){
   if ( n === 1 ){         // If stacksize === 1
     move(start, end);     // Move piece from start to end
   } else if ( n > 1 ) {                     // If stack is larger than 1
     var notStartOrEnd = not(start, end);    // Find the tower notStartOrEnd
-    solve( n - 1, start, notStartOrEnd );   // move all but the last piece to notStartOrEnd
+    solver( n - 1, start, notStartOrEnd );   // move all but the last piece to notStartOrEnd
     move( start, end );                     // move biggest piece from start to finish
-    solve( n - 1, notStartOrEnd, end);      // move the notStartOrEnd Stack to the end
+    solver( n - 1, notStartOrEnd, end);      // move the notStartOrEnd Stack to the end
   }
 
 }
 
-solve(config.pieces, 0, 2);
+solver(config.pieces, 0, 2);
 actions.finish();
